@@ -1,0 +1,36 @@
+{
+  "name": "valibot-introspection",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuajaco/valibot-introspection.git"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "build-types": "tsx scripts/build-types.mts",
+    "format": "prettier -w .",
+    "prepublishOnly": "pnpm build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "@typescript-eslint/typescript-estree": "^7.14.1",
+    "prettier": "^3.3.2",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.2",
+    "valibot": "^0.35.0"
+  },
+  "peerDependencies": {
+    "valibot": "^0.35.0"
+  },
+  "packageManager": "pnpm@9.4.0"
+}
