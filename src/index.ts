@@ -1,5 +1,6 @@
-export * from "./introspect";
-export * from "./issue";
-export * from "./schema";
-export * from "./validation";
-export * from "./transformation";
+export { introspect } from "./introspect";
+export type * from "./introspect";
+export type * from "./issue";
+export type * from "./schema";
+export type * from "./validation";
+export type * from "./transformation";
