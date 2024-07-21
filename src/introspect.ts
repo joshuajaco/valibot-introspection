@@ -1,12 +1,17 @@
 import type * as v from "valibot";
 import type { Schema, SchemaAsync } from "./schema";
-import type { Action, ActionAsync } from "./action";
+import type { Validation, ValidationAsync } from "./validation";
+import type { Transformation, TransformationAsync } from "./transformation";
 
-type WithPipe<T extends v.GenericSchema> = T extends T
+export type Action = Transformation | Validation;
+
+export type ActionAsync = TransformationAsync | ValidationAsync;
+
+export type WithPipe<T extends v.GenericSchema> = T extends T
   ? v.SchemaWithPipe<[T, ...Action[]]>
   : never;
 
-type WithPipeAsync<T extends v.GenericSchemaAsync> = T extends T
+export type WithPipeAsync<T extends v.GenericSchemaAsync> = T extends T
   ? v.SchemaWithPipeAsync<[T, ...ActionAsync[]]>
   : never;
 

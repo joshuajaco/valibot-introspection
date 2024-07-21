@@ -19,36 +19,31 @@ const typeExports = ast.body
   .flatMap((_export) => _export.specifiers)
   .filter((specifier) => specifier.exportKind === "type");
 
+const typeDeclarations = ast.body.filter(
+  (statement) =>
+    statement.type === "TSTypeAliasDeclaration" ||
+    statement.type === "TSInterfaceDeclaration",
+);
+
 const excludes = [
   "GenericSchema",
-  "BaseSchema",
-  "QuestionMarkSchema",
   "GenericSchemaAsync",
-  "BaseSchemaAsync",
-  "QuestionMarkSchemaAsync",
-  "PipeAction",
-  "PipeActionAsync",
+  "GenericTransformation",
+  "GenericTransformationAsync",
+  "GenericValidation",
+  "GenericValidationAsync",
 ];
 
 const types = typeExports.filter(
   (spec) => !excludes.includes(spec.exported.name),
 );
 
-const syncSchemas = types.filter((type) =>
-  type.exported.name.endsWith("Schema"),
-);
-
-const asyncSchemas = types.filter((type) =>
-  type.exported.name.endsWith("SchemaAsync"),
-);
-
-const syncActions = types.filter((type) =>
-  type.exported.name.endsWith("Action"),
-);
-
-const asyncActions = types.filter((type) =>
-  type.exported.name.endsWith("ActionAsync"),
-);
+const syncSchemas = types.filter(_extends("BaseSchema"));
+const asyncSchemas = types.filter(_extends("BaseSchemaAsync"));
+const syncTransformations = types.filter(_extends("BaseTransformation"));
+const asyncTransformations = types.filter(_extends("BaseTransformationAsync"));
+const syncValidations = types.filter(_extends("BaseValidation"));
+const asyncValidations = types.filter(_extends("BaseValidationAsync"));
 
 await Promise.all([
   createDefinitionFile("src/schema.ts", {
@@ -57,10 +52,20 @@ await Promise.all([
       types: asyncSchemas.map(constructTypeReference),
     }),
   }),
-  createDefinitionFile("src/action.ts", {
-    Action: TSUnionType({ types: syncActions.map(constructTypeReference) }),
-    ActionAsync: TSUnionType({
-      types: asyncActions.map(constructTypeReference),
+  createDefinitionFile("src/transformation.ts", {
+    Transformation: TSUnionType({
+      types: syncTransformations.map(constructTypeReference),
+    }),
+    TransformationAsync: TSUnionType({
+      types: asyncTransformations.map(constructTypeReference),
+    }),
+  }),
+  createDefinitionFile("src/validation.ts", {
+    Validation: TSUnionType({
+      types: syncValidations.map(constructTypeReference),
+    }),
+    ValidationAsync: TSUnionType({
+      types: asyncValidations.map(constructTypeReference),
     }),
   }),
 ]);
@@ -115,20 +120,14 @@ async function createDefinitionFile(path: string, exports: ExportMap) {
 /* ========================================================================= */
 
 function constructTypeReference(spec: TSESTree.ExportSpecifier) {
-  const typeDeclarations = ast.body.filter(
-    (statement) =>
-      statement.type === "TSTypeAliasDeclaration" ||
-      statement.type === "TSInterfaceDeclaration",
-  );
-
-  const name = spec.exported.name;
-
   const declaration = typeDeclarations.find(
     ({ id }) => id.name === spec.local.name,
   );
 
   if (!declaration) {
-    throw new Error("Failed to find declaration for '" + name + "'.");
+    throw new Error(
+      "Failed to find declaration for '" + spec.exported.name + "'.",
+    );
   }
 
   let typeArguments;
@@ -205,10 +204,35 @@ function constructTypeReference(spec: TSESTree.ExportSpecifier) {
   return TSTypeReference({
     typeName: TSQualifiedName({
       left: Identifier({ name: "v" }),
-      right: Identifier({ name }),
+      right: Identifier({ name: spec.exported.name }),
     }),
     typeArguments,
   });
+}
+
+/* ========================================================================= */
+/* ================================ _extends =============================== */
+/* ========================================================================= */
+
+function _extends(name: string) {
+  return (spec: TSESTree.ExportSpecifier) => {
+    const declaration = typeDeclarations.find(
+      ({ id }) => id.name === spec.local.name,
+    );
+
+    if (!declaration) {
+      throw new Error(
+        "Failed to find declaration for '" + spec.exported.name + "'.",
+      );
+    }
+
+    if (declaration.type === "TSTypeAliasDeclaration") return false;
+
+    return declaration.extends
+      .map((e) => e.expression)
+      .filter((e) => e.type === "Identifier")
+      .some((e) => e.name === name);
+  };
 }
 
 /* ========================================================================= */

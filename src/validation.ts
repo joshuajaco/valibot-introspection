@@ -1,8 +1,7 @@
 import type * as v from "valibot";
 
-export type Action =
+export type Validation =
   | v.BicAction<string, v.ErrorMessage<v.BicIssue<string>> | undefined>
-  | v.BrandAction<unknown, v.BrandName>
   | v.BytesAction<
       string,
       number,
@@ -42,8 +41,6 @@ export type Action =
         >
       | undefined
     >
-  | v.FilterItemsAction<readonly unknown[]>
-  | v.FindItemAction<readonly unknown[]>
   | v.FiniteAction<number, v.ErrorMessage<v.FiniteIssue<number>> | undefined>
   | v.HashAction<string, v.ErrorMessage<v.HashIssue<string>> | undefined>
   | v.HexColorAction<
@@ -90,7 +87,6 @@ export type Action =
   | v.Mac48Action<string, v.ErrorMessage<v.Mac48Issue<string>> | undefined>
   | v.Mac64Action<string, v.ErrorMessage<v.Mac64Issue<string>> | undefined>
   | v.MacAction<string, v.ErrorMessage<v.MacIssue<string>> | undefined>
-  | v.MapItemsAction<readonly unknown[], unknown>
   | v.MaxBytesAction<
       string,
       number,
@@ -176,9 +172,6 @@ export type Action =
       | undefined
     >
   | v.RawCheckAction<unknown>
-  | v.RawTransformAction<unknown, unknown>
-  | v.ReadonlyAction<unknown>
-  | v.ReduceItemsAction<readonly unknown[], unknown>
   | v.RegexAction<string, v.ErrorMessage<v.RegexIssue<string>> | undefined>
   | v.SafeIntegerAction<
       number,
@@ -193,20 +186,11 @@ export type Action =
       readonly unknown[],
       v.ErrorMessage<v.SomeItemIssue<readonly unknown[]>> | undefined
     >
-  | v.SortItemsAction<readonly unknown[]>
   | v.StartsWithAction<
       string,
       string,
       v.ErrorMessage<v.StartsWithIssue<string, string>> | undefined
     >
-  | v.ToLowerCaseAction
-  | v.ToMaxValueAction<v.ValueInput, v.ValueInput>
-  | v.ToMinValueAction<v.ValueInput, v.ValueInput>
-  | v.ToUpperCaseAction
-  | v.TransformAction<unknown, unknown>
-  | v.TrimAction
-  | v.TrimEndAction
-  | v.TrimStartAction
   | v.UlidAction<string, v.ErrorMessage<v.UlidIssue<string>> | undefined>
   | v.UrlAction<string, v.ErrorMessage<v.UrlIssue<string>> | undefined>
   | v.UuidAction<string, v.ErrorMessage<v.UuidIssue<string>> | undefined>
@@ -216,8 +200,7 @@ export type Action =
       v.ErrorMessage<v.ValueIssue<v.ValueInput, v.ValueInput>> | undefined
     >;
 
-export type ActionAsync =
-  | v.AwaitActionAsync<Promise<unknown>>
+export type ValidationAsync =
   | v.CheckActionAsync<
       unknown,
       v.ErrorMessage<v.CheckIssue<unknown>> | undefined
@@ -230,6 +213,4 @@ export type ActionAsync =
         >
       | undefined
     >
-  | v.RawCheckActionAsync<unknown>
-  | v.RawTransformActionAsync<unknown, unknown>
-  | v.TransformActionAsync<unknown, unknown>;
+  | v.RawCheckActionAsync<unknown>;
