@@ -73,7 +73,7 @@ type ExportMap = Record<string, TSESTree.TypeNode | undefined>;
 
 async function createDefinitionFile(path: string, exports: ExportMap) {
   const template = [
-    'import * as v from "valibot";',
+    'import type * as v from "valibot";',
     ...Object.keys(exports).map((key) => `export type ${key} = PLACEHOLDER;`),
   ].join("\n\n");
 

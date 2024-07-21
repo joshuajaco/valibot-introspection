@@ -1,4 +1,4 @@
-import * as v from "valibot";
+import type * as v from "valibot";
 
 export type Action =
   | v.BicAction<string, v.ErrorMessage<v.BicIssue<string>> | undefined>
