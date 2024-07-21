@@ -32,6 +32,7 @@ const excludes = [
   "GenericTransformationAsync",
   "GenericValidation",
   "GenericValidationAsync",
+  "GenericIssue",
 ];
 
 const types = typeExports.filter(
@@ -44,6 +45,7 @@ const syncTransformations = types.filter(_extends("BaseTransformation"));
 const asyncTransformations = types.filter(_extends("BaseTransformationAsync"));
 const syncValidations = types.filter(_extends("BaseValidation"));
 const asyncValidations = types.filter(_extends("BaseValidationAsync"));
+const issues = types.filter(_extends("BaseIssue"));
 
 await Promise.all([
   createDefinitionFile("src/schema.ts", {
@@ -67,6 +69,9 @@ await Promise.all([
     ValidationAsync: TSUnionType({
       types: asyncValidations.map(constructTypeReference),
     }),
+  }),
+  createDefinitionFile("src/issue.ts", {
+    Issue: TSUnionType({ types: issues.map(constructTypeReference) }),
   }),
 ]);
 

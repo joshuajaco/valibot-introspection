@@ -1,4 +1,5 @@
 import type * as v from "valibot";
+import type { Issue } from "./issue";
 import type { Schema, SchemaAsync } from "./schema";
 import type { Validation, ValidationAsync } from "./validation";
 import type { Transformation, TransformationAsync } from "./transformation";
@@ -16,6 +17,7 @@ export type WithPipeAsync<T extends v.GenericSchemaAsync> = T extends T
   : never;
 
 type GenericType =
+  | v.GenericIssue
   | v.GenericSchema
   | v.GenericSchemaAsync
   | v.GenericTransformation
@@ -23,19 +25,21 @@ type GenericType =
   | v.GenericValidation
   | v.GenericValidationAsync;
 
-export type Introspect<T extends GenericType> = T extends v.GenericSchema
-  ? Schema | WithPipe<Schema>
-  : T extends v.GenericSchemaAsync
-    ? SchemaAsync | WithPipeAsync<SchemaAsync>
-    : T extends v.GenericTransformation
-      ? Transformation
-      : T extends v.GenericTransformationAsync
-        ? TransformationAsync
-        : T extends v.GenericValidation
-          ? Validation
-          : T extends v.GenericValidationAsync
-            ? ValidationAsync
-            : T;
+export type Introspect<T extends GenericType> = T extends v.GenericIssue
+  ? Issue
+  : T extends v.GenericSchema
+    ? Schema | WithPipe<Schema>
+    : T extends v.GenericSchemaAsync
+      ? SchemaAsync | WithPipeAsync<SchemaAsync>
+      : T extends v.GenericTransformation
+        ? Transformation
+        : T extends v.GenericTransformationAsync
+          ? TransformationAsync
+          : T extends v.GenericValidation
+            ? Validation
+            : T extends v.GenericValidationAsync
+              ? ValidationAsync
+              : T;
 
 export function introspect<T extends GenericType>(type: T): Introspect<T> {
   return type as Introspect<T>;
