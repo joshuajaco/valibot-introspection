@@ -230,7 +230,6 @@ export type ActionAsync =
         >
       | undefined
     >
-  | v.PipeActionAsync<unknown, unknown, v.BaseIssue<unknown>>
   | v.RawCheckActionAsync<unknown>
   | v.RawTransformActionAsync<unknown, unknown>
   | v.TransformActionAsync<unknown, unknown>;

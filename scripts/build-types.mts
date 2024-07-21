@@ -27,6 +27,7 @@ const excludes = [
   "BaseSchemaAsync",
   "QuestionMarkSchemaAsync",
   "PipeAction",
+  "PipeActionAsync",
 ];
 
 const types = typeExports.filter(
