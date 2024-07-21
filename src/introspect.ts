@@ -15,16 +15,28 @@ export type WithPipeAsync<T extends v.GenericSchemaAsync> = T extends T
   ? v.SchemaWithPipeAsync<[T, ...ActionAsync[]]>
   : never;
 
-export function introspect(schema: v.GenericSchema): Schema | WithPipe<Schema>;
+type GenericType =
+  | v.GenericSchema
+  | v.GenericSchemaAsync
+  | v.GenericTransformation
+  | v.GenericTransformationAsync
+  | v.GenericValidation
+  | v.GenericValidationAsync;
 
-export function introspect(
-  schema: v.GenericSchemaAsync,
-): SchemaAsync | WithPipeAsync<SchemaAsync>;
+export type Introspect<T extends GenericType> = T extends v.GenericSchema
+  ? Schema | WithPipe<Schema>
+  : T extends v.GenericSchemaAsync
+    ? SchemaAsync | WithPipeAsync<SchemaAsync>
+    : T extends v.GenericTransformation
+      ? Transformation
+      : T extends v.GenericTransformationAsync
+        ? TransformationAsync
+        : T extends v.GenericValidation
+          ? Validation
+          : T extends v.GenericValidationAsync
+            ? ValidationAsync
+            : T;
 
-export function introspect(
-  schema: v.GenericSchema | v.GenericSchemaAsync,
-): Schema | WithPipe<Schema> | SchemaAsync | WithPipeAsync<SchemaAsync>;
-
-export function introspect(schema: v.GenericSchema | v.GenericSchemaAsync) {
-  return schema;
+export function introspect<T extends GenericType>(type: T): Introspect<T> {
+  return type as Introspect<T>;
 }
