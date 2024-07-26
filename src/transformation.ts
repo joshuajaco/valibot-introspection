@@ -2,13 +2,14 @@ import type * as v from "valibot";
 
 export type Transformation =
   | v.BrandAction<unknown, v.BrandName>
-  | v.FilterItemsAction<readonly unknown[]>
-  | v.FindItemAction<readonly unknown[]>
-  | v.MapItemsAction<readonly unknown[], unknown>
+  | v.FilterItemsAction<v.ArrayInput>
+  | v.FindItemAction<v.ArrayInput>
+  | v.MapItemsAction<v.ArrayInput, unknown>
+  | v.NormalizeAction<v.NormalizeForm | undefined>
   | v.RawTransformAction<unknown, unknown>
   | v.ReadonlyAction<unknown>
-  | v.ReduceItemsAction<readonly unknown[], unknown>
-  | v.SortItemsAction<readonly unknown[]>
+  | v.ReduceItemsAction<v.ArrayInput, unknown>
+  | v.SortItemsAction<v.ArrayInput>
   | v.ToLowerCaseAction
   | v.ToMaxValueAction<v.ValueInput, v.ValueInput>
   | v.ToMinValueAction<v.ValueInput, v.ValueInput>

@@ -8,7 +8,7 @@ export type Issue =
   | v.BooleanIssue
   | v.BytesIssue<string, number>
   | v.CheckIssue<unknown>
-  | v.CheckItemsIssue<readonly unknown[]>
+  | v.CheckItemsIssue<v.ArrayInput>
   | v.CreditCardIssue<string>
   | v.Cuid2Issue<string>
   | v.CustomIssue
@@ -19,7 +19,7 @@ export type Issue =
   | v.EmptyIssue<v.LengthInput>
   | v.EndsWithIssue<string, string>
   | v.EnumIssue
-  | v.EveryItemIssue<readonly unknown[]>
+  | v.EveryItemIssue<v.ArrayInput>
   | v.ExcludesIssue<v.ContentInput, v.ContentRequirement<v.ContentInput>>
   | v.FileIssue
   | v.FiniteIssue<number>
@@ -84,7 +84,7 @@ export type Issue =
   | v.SafeIntegerIssue<number>
   | v.SetIssue
   | v.SizeIssue<v.SizeInput, number>
-  | v.SomeItemIssue<readonly unknown[]>
+  | v.SomeItemIssue<v.ArrayInput>
   | v.StartsWithIssue<string, string>
   | v.StrictObjectIssue
   | v.StrictTupleIssue

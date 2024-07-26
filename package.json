@@ -27,10 +27,10 @@
     "prettier": "^3.3.2",
     "tsx": "^4.16.0",
     "typescript": "^5.5.2",
-    "valibot": "^0.35.0"
+    "valibot": "^0.36.0"
   },
   "peerDependencies": {
-    "valibot": "^0.35.0"
+    "valibot": "^0.36.0"
   },
   "packageManager": "pnpm@9.4.0"
 }

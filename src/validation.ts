@@ -9,8 +9,8 @@ export type Validation =
     >
   | v.CheckAction<unknown, v.ErrorMessage<v.CheckIssue<unknown>> | undefined>
   | v.CheckItemsAction<
-      readonly unknown[],
-      v.ErrorMessage<v.CheckItemsIssue<readonly unknown[]>> | undefined
+      v.ArrayInput,
+      v.ErrorMessage<v.CheckItemsIssue<v.ArrayInput>> | undefined
     >
   | v.CreditCardAction<
       string,
@@ -30,8 +30,8 @@ export type Validation =
       v.ErrorMessage<v.EndsWithIssue<string, string>> | undefined
     >
   | v.EveryItemAction<
-      readonly unknown[],
-      v.ErrorMessage<v.EveryItemIssue<readonly unknown[]>> | undefined
+      v.ArrayInput,
+      v.ErrorMessage<v.EveryItemIssue<v.ArrayInput>> | undefined
     >
   | v.ExcludesAction<
       v.ContentInput,
@@ -183,8 +183,8 @@ export type Validation =
       v.ErrorMessage<v.SizeIssue<v.SizeInput, number>> | undefined
     >
   | v.SomeItemAction<
-      readonly unknown[],
-      v.ErrorMessage<v.SomeItemIssue<readonly unknown[]>> | undefined
+      v.ArrayInput,
+      v.ErrorMessage<v.SomeItemIssue<v.ArrayInput>> | undefined
     >
   | v.StartsWithAction<
       string,
