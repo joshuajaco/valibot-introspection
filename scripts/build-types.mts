@@ -258,13 +258,12 @@ type Options<
   Partial<Pick<T, TPartialKeys> & Base>;
 
 function TSTypeReference(
-  options: Options<TSESTree.TSTypeReference, "typeArguments", "typeParameters">,
+  options: Options<TSESTree.TSTypeReference, "typeArguments">,
 ): TSESTree.TSTypeReference {
   return Node({
     typeArguments: undefined,
     ...options,
     type: AST_NODE_TYPES.TSTypeReference,
-    typeParameters: options.typeArguments,
   });
 }
 

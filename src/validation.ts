@@ -1,6 +1,7 @@
 import type * as v from "valibot";
 
 export type Validation =
+  | v.Base64Action<string, v.ErrorMessage<v.Base64Issue<string>> | undefined>
   | v.BicAction<string, v.ErrorMessage<v.BicIssue<string>> | undefined>
   | v.BytesAction<
       string,

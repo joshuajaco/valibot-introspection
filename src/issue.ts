@@ -2,6 +2,7 @@ import type * as v from "valibot";
 
 export type Issue =
   | v.ArrayIssue
+  | v.Base64Issue<string>
   | v.BicIssue<string>
   | v.BigintIssue
   | v.BlobIssue
@@ -74,7 +75,7 @@ export type Issue =
   | v.ObjectIssue
   | v.ObjectWithRestIssue
   | v.OctalIssue<string>
-  | v.PartialCheckIssue<unknown>
+  | v.PartialCheckIssue<Record<string, unknown> | ArrayLike<unknown>>
   | v.PicklistIssue
   | v.PromiseIssue
   | v.RawCheckIssue<unknown>
