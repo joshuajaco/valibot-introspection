@@ -15,6 +15,7 @@ export type Issue =
   | v.CustomIssue
   | v.DateIssue
   | v.DecimalIssue<string>
+  | v.DigitsIssue<string>
   | v.EmailIssue<string>
   | v.EmojiIssue<string>
   | v.EmptyIssue<v.LengthInput>
@@ -61,6 +62,7 @@ export type Issue =
   | v.MinValueIssue<v.ValueInput, v.ValueInput>
   | v.MultipleOfIssue<number, number>
   | v.NanIssue
+  | v.NanoIDIssue<string>
   | v.NeverIssue
   | v.NonEmptyIssue<v.LengthInput>
   | v.NonNullableIssue

@@ -102,12 +102,17 @@ export type Schema =
       v.ErrorMessage<v.TupleWithRestIssue> | undefined
     >
   | v.UndefinedSchema<v.ErrorMessage<v.UndefinedIssue> | undefined>
+  | v.UndefinedableSchema<
+      v.BaseSchema<unknown, unknown, v.BaseIssue<unknown>>,
+      v.Default<v.BaseSchema<unknown, unknown, v.BaseIssue<unknown>>, undefined>
+    >
   | v.UnionSchema<
       v.UnionOptions,
       | v.ErrorMessage<v.UnionIssue<v.InferIssue<v.UnionOptions[number]>>>
       | undefined
     >
   | v.UnknownSchema
+  | v.VariantOptionSchema<string>
   | v.VariantSchema<
       string,
       v.VariantOptions<string>,
@@ -231,11 +236,21 @@ export type SchemaAsync =
       | v.BaseSchemaAsync<unknown, unknown, v.BaseIssue<unknown>>,
       v.ErrorMessage<v.TupleWithRestIssue> | undefined
     >
+  | v.UndefinedableSchemaAsync<
+      | v.BaseSchema<unknown, unknown, v.BaseIssue<unknown>>
+      | v.BaseSchemaAsync<unknown, unknown, v.BaseIssue<unknown>>,
+      v.DefaultAsync<
+        | v.BaseSchema<unknown, unknown, v.BaseIssue<unknown>>
+        | v.BaseSchemaAsync<unknown, unknown, v.BaseIssue<unknown>>,
+        undefined
+      >
+    >
   | v.UnionSchemaAsync<
       v.UnionOptionsAsync,
       | v.ErrorMessage<v.UnionIssue<v.InferIssue<v.UnionOptionsAsync[number]>>>
       | undefined
     >
+  | v.VariantOptionSchemaAsync<string>
   | v.VariantSchemaAsync<
       string,
       v.VariantOptionsAsync<string>,

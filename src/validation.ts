@@ -19,6 +19,7 @@ export type Validation =
     >
   | v.Cuid2Action<string, v.ErrorMessage<v.Cuid2Issue<string>> | undefined>
   | v.DecimalAction<string, v.ErrorMessage<v.DecimalIssue<string>> | undefined>
+  | v.DigitsAction<string, v.ErrorMessage<v.DigitsIssue<string>> | undefined>
   | v.EmailAction<string, v.ErrorMessage<v.EmailIssue<string>> | undefined>
   | v.EmojiAction<string, v.ErrorMessage<v.EmojiIssue<string>> | undefined>
   | v.EmptyAction<
@@ -139,6 +140,7 @@ export type Validation =
       number,
       v.ErrorMessage<v.MultipleOfIssue<number, number>> | undefined
     >
+  | v.NanoIDAction<string, v.ErrorMessage<v.NanoIDIssue<string>> | undefined>
   | v.NonEmptyAction<
       v.LengthInput,
       v.ErrorMessage<v.NonEmptyIssue<v.LengthInput>> | undefined
