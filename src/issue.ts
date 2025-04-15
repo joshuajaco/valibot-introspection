@@ -26,6 +26,8 @@ export type Issue =
   | v.FileIssue
   | v.FiniteIssue<number>
   | v.FunctionIssue
+  | v.GraphemesIssue<string, number>
+  | v.GtValueIssue<v.ValueInput, v.ValueInput>
   | v.HashIssue<string>
   | v.HexColorIssue<string>
   | v.HexadecimalIssue<string>
@@ -47,19 +49,24 @@ export type Issue =
   | v.LiteralIssue
   | v.LooseObjectIssue
   | v.LooseTupleIssue
+  | v.LtValueIssue<v.ValueInput, v.ValueInput>
   | v.Mac48Issue<string>
   | v.Mac64Issue<string>
   | v.MacIssue<string>
   | v.MapIssue
   | v.MaxBytesIssue<string, number>
+  | v.MaxGraphemesIssue<string, number>
   | v.MaxLengthIssue<v.LengthInput, number>
   | v.MaxSizeIssue<v.SizeInput, number>
   | v.MaxValueIssue<v.ValueInput, v.ValueInput>
+  | v.MaxWordsIssue<string, number>
   | v.MimeTypeIssue<Blob, readonly `${string}/${string}`[]>
   | v.MinBytesIssue<string, number>
+  | v.MinGraphemesIssue<string, number>
   | v.MinLengthIssue<v.LengthInput, number>
   | v.MinSizeIssue<v.SizeInput, number>
   | v.MinValueIssue<v.ValueInput, v.ValueInput>
+  | v.MinWordsIssue<string, number>
   | v.MultipleOfIssue<number, number>
   | v.NanIssue
   | v.NanoIDIssue<string>
@@ -69,9 +76,12 @@ export type Issue =
   | v.NonNullishIssue
   | v.NonOptionalIssue
   | v.NotBytesIssue<string, number>
+  | v.NotGraphemesIssue<string, number>
   | v.NotLengthIssue<v.LengthInput, number>
   | v.NotSizeIssue<v.SizeInput, number>
   | v.NotValueIssue<v.ValueInput, v.ValueInput>
+  | v.NotValuesIssue<v.ValueInput, readonly v.ValueInput[]>
+  | v.NotWordsIssue<string, number>
   | v.NullIssue
   | v.NumberIssue
   | v.ObjectIssue
@@ -84,9 +94,11 @@ export type Issue =
   | v.RawTransformIssue<unknown>
   | v.RecordIssue
   | v.RegexIssue<string>
+  | v.RfcEmailIssue<string>
   | v.SafeIntegerIssue<number>
   | v.SetIssue
   | v.SizeIssue<v.SizeInput, number>
+  | v.SlugIssue<string>
   | v.SomeItemIssue<v.ArrayInput>
   | v.StartsWithIssue<string, string>
   | v.StrictObjectIssue
@@ -101,5 +113,7 @@ export type Issue =
   | v.UrlIssue<string>
   | v.UuidIssue<string>
   | v.ValueIssue<v.ValueInput, v.ValueInput>
+  | v.ValuesIssue<v.ValueInput, readonly v.ValueInput[]>
   | v.VariantIssue
-  | v.VoidIssue;
+  | v.VoidIssue
+  | v.WordsIssue<string, number>;
