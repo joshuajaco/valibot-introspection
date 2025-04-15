@@ -33,6 +33,8 @@ const excludes = [
   "GenericValidation",
   "GenericValidationAsync",
   "GenericIssue",
+  "PartialCheckAction",
+  "PartialCheckActionAsync",
 ];
 
 const types = typeExports.filter(

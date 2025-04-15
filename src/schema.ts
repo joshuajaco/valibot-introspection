@@ -12,6 +12,10 @@ export type Schema =
   | v.CustomSchema<unknown, v.ErrorMessage<v.CustomIssue> | undefined>
   | v.DateSchema<v.ErrorMessage<v.DateIssue> | undefined>
   | v.EnumSchema<v.Enum, v.ErrorMessage<v.EnumIssue> | undefined>
+  | v.ExactOptionalSchema<
+      v.BaseSchema<unknown, unknown, v.BaseIssue<unknown>>,
+      v.Default<v.BaseSchema<unknown, unknown, v.BaseIssue<unknown>>, never>
+    >
   | v.FileSchema<v.ErrorMessage<v.FileIssue> | undefined>
   | v.FunctionSchema<v.ErrorMessage<v.FunctionIssue> | undefined>
   | v.InstanceSchema<v.Class, v.ErrorMessage<v.InstanceIssue> | undefined>
@@ -112,7 +116,6 @@ export type Schema =
       | undefined
     >
   | v.UnknownSchema
-  | v.VariantOptionSchema<string>
   | v.VariantSchema<
       string,
       v.VariantOptions<string>,
@@ -127,6 +130,15 @@ export type SchemaAsync =
       v.ErrorMessage<v.ArrayIssue> | undefined
     >
   | v.CustomSchemaAsync<unknown, v.ErrorMessage<v.CustomIssue> | undefined>
+  | v.ExactOptionalSchemaAsync<
+      | v.BaseSchema<unknown, unknown, v.BaseIssue<unknown>>
+      | v.BaseSchemaAsync<unknown, unknown, v.BaseIssue<unknown>>,
+      v.DefaultAsync<
+        | v.BaseSchema<unknown, unknown, v.BaseIssue<unknown>>
+        | v.BaseSchemaAsync<unknown, unknown, v.BaseIssue<unknown>>,
+        never
+      >
+    >
   | v.IntersectSchemaAsync<
       v.IntersectOptionsAsync,
       v.ErrorMessage<v.IntersectIssue> | undefined
@@ -250,7 +262,6 @@ export type SchemaAsync =
       | v.ErrorMessage<v.UnionIssue<v.InferIssue<v.UnionOptionsAsync[number]>>>
       | undefined
     >
-  | v.VariantOptionSchemaAsync<string>
   | v.VariantSchemaAsync<
       string,
       v.VariantOptionsAsync<string>,

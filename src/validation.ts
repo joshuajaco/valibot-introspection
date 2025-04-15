@@ -44,6 +44,16 @@ export type Validation =
       | undefined
     >
   | v.FiniteAction<number, v.ErrorMessage<v.FiniteIssue<number>> | undefined>
+  | v.GraphemesAction<
+      string,
+      number,
+      v.ErrorMessage<v.GraphemesIssue<string, number>> | undefined
+    >
+  | v.GtValueAction<
+      v.ValueInput,
+      v.ValueInput,
+      v.ErrorMessage<v.GtValueIssue<v.ValueInput, v.ValueInput>> | undefined
+    >
   | v.HashAction<string, v.ErrorMessage<v.HashIssue<string>> | undefined>
   | v.HexColorAction<
       string,
@@ -86,6 +96,11 @@ export type Validation =
       number,
       v.ErrorMessage<v.LengthIssue<v.LengthInput, number>> | undefined
     >
+  | v.LtValueAction<
+      v.ValueInput,
+      v.ValueInput,
+      v.ErrorMessage<v.LtValueIssue<v.ValueInput, v.ValueInput>> | undefined
+    >
   | v.Mac48Action<string, v.ErrorMessage<v.Mac48Issue<string>> | undefined>
   | v.Mac64Action<string, v.ErrorMessage<v.Mac64Issue<string>> | undefined>
   | v.MacAction<string, v.ErrorMessage<v.MacIssue<string>> | undefined>
@@ -93,6 +108,11 @@ export type Validation =
       string,
       number,
       v.ErrorMessage<v.MaxBytesIssue<string, number>> | undefined
+    >
+  | v.MaxGraphemesAction<
+      string,
+      number,
+      v.ErrorMessage<v.MaxGraphemesIssue<string, number>> | undefined
     >
   | v.MaxLengthAction<
       v.LengthInput,
@@ -109,6 +129,12 @@ export type Validation =
       v.ValueInput,
       v.ErrorMessage<v.MaxValueIssue<v.ValueInput, v.ValueInput>> | undefined
     >
+  | v.MaxWordsAction<
+      string,
+      Intl.LocalesArgument,
+      number,
+      v.ErrorMessage<v.MaxWordsIssue<string, number>> | undefined
+    >
   | v.MimeTypeAction<
       Blob,
       readonly `${string}/${string}`[],
@@ -119,6 +145,11 @@ export type Validation =
       string,
       number,
       v.ErrorMessage<v.MinBytesIssue<string, number>> | undefined
+    >
+  | v.MinGraphemesAction<
+      string,
+      number,
+      v.ErrorMessage<v.MinGraphemesIssue<string, number>> | undefined
     >
   | v.MinLengthAction<
       v.LengthInput,
@@ -135,6 +166,12 @@ export type Validation =
       v.ValueInput,
       v.ErrorMessage<v.MinValueIssue<v.ValueInput, v.ValueInput>> | undefined
     >
+  | v.MinWordsAction<
+      string,
+      Intl.LocalesArgument,
+      number,
+      v.ErrorMessage<v.MinWordsIssue<string, number>> | undefined
+    >
   | v.MultipleOfAction<
       number,
       number,
@@ -149,6 +186,11 @@ export type Validation =
       string,
       number,
       v.ErrorMessage<v.NotBytesIssue<string, number>> | undefined
+    >
+  | v.NotGraphemesAction<
+      string,
+      number,
+      v.ErrorMessage<v.NotGraphemesIssue<string, number>> | undefined
     >
   | v.NotLengthAction<
       v.LengthInput,
@@ -165,17 +207,25 @@ export type Validation =
       v.ValueInput,
       v.ErrorMessage<v.NotValueIssue<v.ValueInput, v.ValueInput>> | undefined
     >
-  | v.OctalAction<string, v.ErrorMessage<v.OctalIssue<string>> | undefined>
-  | v.PartialCheckAction<
-      Record<string, unknown> | ArrayLike<unknown>,
-      Record<string, unknown> | ArrayLike<unknown>,
-      | v.ErrorMessage<
-          v.PartialCheckIssue<Record<string, unknown> | ArrayLike<unknown>>
-        >
+  | v.NotValuesAction<
+      v.ValueInput,
+      readonly v.ValueInput[],
+      | v.ErrorMessage<v.NotValuesIssue<v.ValueInput, readonly v.ValueInput[]>>
       | undefined
     >
+  | v.NotWordsAction<
+      string,
+      Intl.LocalesArgument,
+      number,
+      v.ErrorMessage<v.NotWordsIssue<string, number>> | undefined
+    >
+  | v.OctalAction<string, v.ErrorMessage<v.OctalIssue<string>> | undefined>
   | v.RawCheckAction<unknown>
   | v.RegexAction<string, v.ErrorMessage<v.RegexIssue<string>> | undefined>
+  | v.RfcEmailAction<
+      string,
+      v.ErrorMessage<v.RfcEmailIssue<string>> | undefined
+    >
   | v.SafeIntegerAction<
       number,
       v.ErrorMessage<v.SafeIntegerIssue<number>> | undefined
@@ -185,6 +235,7 @@ export type Validation =
       number,
       v.ErrorMessage<v.SizeIssue<v.SizeInput, number>> | undefined
     >
+  | v.SlugAction<string, v.ErrorMessage<v.SlugIssue<string>> | undefined>
   | v.SomeItemAction<
       v.ArrayInput,
       v.ErrorMessage<v.SomeItemIssue<v.ArrayInput>> | undefined
@@ -201,6 +252,18 @@ export type Validation =
       v.ValueInput,
       v.ValueInput,
       v.ErrorMessage<v.ValueIssue<v.ValueInput, v.ValueInput>> | undefined
+    >
+  | v.ValuesAction<
+      v.ValueInput,
+      readonly v.ValueInput[],
+      | v.ErrorMessage<v.ValuesIssue<v.ValueInput, readonly v.ValueInput[]>>
+      | undefined
+    >
+  | v.WordsAction<
+      string,
+      Intl.LocalesArgument,
+      number,
+      v.ErrorMessage<v.WordsIssue<string, number>> | undefined
     >;
 
 export type ValidationAsync =
@@ -208,12 +271,8 @@ export type ValidationAsync =
       unknown,
       v.ErrorMessage<v.CheckIssue<unknown>> | undefined
     >
-  | v.PartialCheckActionAsync<
-      Record<string, unknown> | ArrayLike<unknown>,
-      Record<string, unknown> | ArrayLike<unknown>,
-      | v.ErrorMessage<
-          v.PartialCheckIssue<Record<string, unknown> | ArrayLike<unknown>>
-        >
-      | undefined
+  | v.CheckItemsActionAsync<
+      v.ArrayInput,
+      v.ErrorMessage<v.CheckItemsIssue<v.ArrayInput>> | undefined
     >
   | v.RawCheckActionAsync<unknown>;
